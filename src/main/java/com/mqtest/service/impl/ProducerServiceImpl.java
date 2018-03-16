@@ -7,6 +7,7 @@ import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.Topic;
 
+import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
@@ -48,18 +49,8 @@ public class ProducerServiceImpl implements ProducerService {
 	            }
 	        });
 	        for(int i=0;i<10;i++) {
-	            jmsTemplate.convertAndSend(destination, message);
+	            jmsTemplate.convertAndSend(new ActiveMQTopic(destination), message);
 	        }
 	}
-	public void send(String topicName,final String message){
-        jmsTemplate.send(topicName, new MessageCreator() {
-            @Override
-            public Message createMessage(Session session) throws JMSException {
-                return session.createTextMessage(message);
-            }
-        });
-        for(int i=0;i<10;i++) {
-            jmsTemplate.convertAndSend(topicName, message);
-        }
-    }
+
 }

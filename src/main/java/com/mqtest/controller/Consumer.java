@@ -22,7 +22,7 @@ public class Consumer {
         String opt = "";
         for (int i = 0; i < 100; i++) {
             try {                
-                queueSender.sendQueue("test.queue", message+i);
+                queueSender.sendQueue("QueueReceiver1", message+i);
                 System.out.println(message+i);
                 opt = "suc";
             } catch (Exception e) {
@@ -39,8 +39,8 @@ public class Consumer {
          String message = req.getParameter("message");
          //for (int i = 0; i < 100; i++) {
          try {
-        	 queueSender.sendTopic("test.topic", message);
-        	 queueSender.sendTopic("ceshi", message);            
+        	 queueSender.sendTopic("TopicReceiver1", message);
+        	 queueSender.sendTopic("TopicReceiver2", message);            
              opt = "suc";
          } catch (Exception e) {
              opt = e.getCause().toString();
